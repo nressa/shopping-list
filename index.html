@@ -17,14 +17,18 @@
 			<div class="card">
 				<div class="container-fluid p-lg-4 p-sm-2">
 					<h1>{{ header.toLocaleUpperCase() }}</h1>
-					<p>Party Need:</p>
+					<br/>
+					<p class="font-weight-bold">Party Need:</p>
 					<ul>
 						<li v-for="item in items">{{ item }}</li>
 					</ul>
-					<p>Food</p>
+					<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." />
+					<br/>
+					<p class="font-weight-bold">Food</p>
 					<ul>
 						<li v-for="snack in snacks">{{ snack }}</li>
 					</ul>
+
 				</div>
 			</div>
 		</div>
@@ -39,6 +43,7 @@
 			el: '#shopping-list',
 			data: {
 				header: 'shopping list',
+				newItem: '',
 				items:[
 					'20 hats',
 					'10 poppers',
