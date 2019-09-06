@@ -17,6 +17,14 @@
 			<div class="card">
 				<div class="container-fluid p-lg-4 p-sm-2">
 					<h1>{{ header.toLocaleUpperCase() }}</h1>
+					<p>Party Need:</p>
+					<ul>
+						<li v-for="item in items">{{ item }}</li>
+					</ul>
+					<p>Food</p>
+					<ul>
+						<li v-for="snack in snacks">{{ snack }}</li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -30,7 +38,23 @@
 		var shoppingList = new Vue({
 			el: '#shopping-list',
 			data: {
-				header: 'shopping list application'
+				header: 'shopping list',
+				items:[
+					'20 hats',
+					'10 poppers',
+					'40 pair of spoon and fork',
+					'20 paper plates',
+					'40 cups'
+				],
+				snacks:[
+					'Spagetti 1kl',
+					'Coke 5l',
+					'Chocolate Cake Round 11 inch',
+					'Pork Meat spring roll 40',
+					'Rice 8kl',
+					'Pork Meat Porck Chop cut 2.5kl',
+					'Cooking Oil 1 li',
+				]
 			}
 		});
 	</script>
