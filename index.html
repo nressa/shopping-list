@@ -16,10 +16,7 @@
 			<br/>
 			<div class="card">
 				<div class="container-fluid p-lg-4 p-sm-2">
-					<!-- Shorthand If Statement otherwise known as ternary statement -->
-					<h1>{{ header ? header : 'Welcome' }}</h1>
-					<!-- <h1>{{ if(header) {return 'welcome'} }}</h1> -->
-					<input type="text" v-model="header" class="form-control" />
+					<h1>{{ header.toLocaleUpperCase() }}</h1>
 				</div>
 			</div>
 		</div>
@@ -33,7 +30,7 @@
 		var shoppingList = new Vue({
 			el: '#shopping-list',
 			data: {
-				header: null
+				header: 'shopping list application'
 			}
 		});
 	</script>
