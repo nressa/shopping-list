@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="Free Web tutorials">
+ 	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+ 	<meta name="author" content="John Doe">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<link type="css/stylesheet" href="styles.css" />
+	<title>Shopping List App</title>
+</head>
+<body>
+	<div id="shopping-list">
+		<h1>{{ header }}</h1>
+		<input type="text" v-model="header" />
+	</div>
+
+	<script src="https://unpkg.com/vue"></script>
+	<script>
+		var shoppingList = new Vue({
+			el: '#shopping-list',
+			data: {
+				header: 'Vue is ready to party'
+			}
+		});
+	</script>
+</body>
+</html>
