@@ -23,17 +23,15 @@
 						<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
 					</div>
 					<br/>
-					<a v-bind:href="newItem" target="_blank" >Dynamic URL</a>
-					<br/>
 					<div class="row">
 						<div class="col-md-12">
 							<p class="font-weight-bold">Party Need:</p>
 							
 							<div class="form-row" v-if="state === 'edit'">
 								<div class="col-md-9">
-									<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." @keyup.enter="saveItem()" />
+									<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." />
 								</div>
-								<button class="btn btn-primary" @click="saveItem()">Add Item</button>
+								<button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem()">Add Item</button>
 							</div>
 							<br/>
 							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
