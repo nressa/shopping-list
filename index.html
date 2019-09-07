@@ -16,19 +16,35 @@
 			<br/>
 			<div class="card">
 				<div class="container-fluid p-lg-4 p-sm-2">
-					<h1>{{ header.toLocaleUpperCase() }}</h1>
-					<p>Party Need:</p>
-					<ul>
-						<li v-for="item in items">{{ item }}</li>
-					</ul>
-					<p>Food</p>
-					<ul>
-						<li v-for="snack in snacks">{{ snack }}</li>
-					</ul>
+					<div class="col-md-12">
+						<h1>{{ header.toLocaleUpperCase() }}</h1>
+						<br/>
+						<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
+						<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
+					</div>
+					<br/>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="font-weight-bold">Party Need:</p>
+							
+							<div class="form-row" v-if="state === 'edit'">
+								<div class="col-md-9">
+									<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." />
+								</div>
+								<button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem()">Add Item</button>
+							</div>
+							<br/>
+							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
+							<ul>
+								<li v-for="item in items">{{ item }}</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<br/>
 
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -39,22 +55,25 @@
 			el: '#shopping-list',
 			data: {
 				header: 'shopping list',
+				state: 'default',
+				newItem: '',
 				items:[
-					'20 hats',
-					'10 poppers',
-					'40 pair of spoon and fork',
-					'20 paper plates',
-					'40 cups'
-				],
-				snacks:[
-					'Spagetti 1kl',
-					'Coke 5l',
-					'Chocolate Cake Round 11 inch',
-					'Pork Meat spring roll 40',
-					'Rice 8kl',
-					'Pork Meat Porck Chop cut 2.5kl',
-					'Cooking Oil 1 li',
+					// '20 hats',
+					// '10 poppers',
+					// '40 pair of spoon and fork',
+					// '20 paper plates',
+					// '40 cups'
 				]
+			},
+			methods: {
+				saveItem: function(){
+					this.items.push(this.newItem);
+					this.newItem = "";
+				},
+				changeState: function(newState){
+					this.state = newState;
+					this.newItem = "";
+				}
 			}
 		});
 	</script>
