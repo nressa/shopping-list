@@ -6,7 +6,7 @@
  	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
  	<meta name="author" content="John Doe">
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 	<link type="css/stylesheet" href="styles.css" />
+ 	<link rel="stylesheet" href="style.css" />
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Shopping List App</title>
 </head>
@@ -36,7 +36,16 @@
 							<br/>
 							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
 							<ul>
-								<li v-for="item in items">{{ item }}</li>
+								<!-- Object Style -->
+								<!-- <li v-for="item in items" :class="{strikeout: item.purchased}">{{ item.label }}</li> -->
+								<!-- Keeps template simple  -->
+
+								<!-- Array Style -->
+								<!-- Favorable to toggle multiple classes (Sample: High Priority) -->
+								<li v-for="item in items" 
+									:class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']"
+                                    @click="togglePurchased(item)">{{ item.label }}</li>
+								<!-- gives more flexibility -->
 							</ul>
 						</div>
 					</div>
@@ -58,22 +67,34 @@
 				state: 'default',
 				newItem: '',
 				items:[
-					// '20 hats',
-					// '10 poppers',
-					// '40 pair of spoon and fork',
-					// '20 paper plates',
-					// '40 cups'
+					{
+						label: '25 party hats',
+						purchased: false,
+						priority: false,
+					},
+					{
+						label: '25 monoblock chairs',
+						purchased: true,
+						priority: false,
+					},
+					{
+						label: '30 paper plates',
+						purchased: false,
+						priority: true,
+					}
 				]
 			},
 			methods: {
 				saveItem: function(){
 					this.items.push(this.newItem);
-					this.newItem = "";
 				},
 				changeState: function(newState){
 					this.state = newState;
 					this.newItem = "";
-				}
+				},
+                togglePurchased: function(item) {
+                    item.purchased = !item.purchased
+                }
 			}
 		});
 	</script>

@@ -1,0 +1,12 @@
+body{
+	background-color: #f8f8f8;
+}
+
+.strikeout{
+	text-decoration: line-through;
+	color: #999!important;
+}
+
+.li{
+	cursor: pointer;
+}
