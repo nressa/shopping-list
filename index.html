@@ -17,10 +17,12 @@
 			<div class="card">
 				<div class="container-fluid p-lg-4 p-sm-2">
 					<div class="col-md-12">
+						<div class="float-right">
+							<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
+							<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
+						</div>
 						<h1>{{ header.toLocaleUpperCase() }}</h1>
 						<br/>
-						<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
-						<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
 					</div>
 					<br/>
 					<div class="row">
@@ -28,14 +30,18 @@
 							<p class="font-weight-bold">Party Need:</p>
 							
 							<div class="form-row" v-if="state === 'edit'">
-								<div class="col-md-9">
-									<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." />
+								<div class="col-md-8">
+									<input type="text" v-model="newItem" class="form-control m-md-3" placeholder="add new item ..." />
+									<textarea type="text" v-model="newItemDescription" class="form-control m-md-3" placeholder="What is the item description?">
+									</textarea>
+									<button class="btn btn-primary m-md-3" :disabled="newItem.length && newItemDescription.length === 0" @click="saveItem()">Add Item</button>
 								</div>
-								<p> {{ characterCount }} / 200 </p>
-								<button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem()">Add Item</button>
 							</div>
+
 							<br/>
+
 							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
+
 							<ul>
 								<!-- Object Style -->
 								<!-- <li v-for="item in items" :class="{strikeout: item.purchased}">{{ item.label }}</li> -->
@@ -43,9 +49,15 @@
 
 								<!-- Array Style -->
 								<!-- Favorable to toggle multiple classes (Sample: High Priority) -->
-								<li v-for="item in items" 
-									:class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']"
-                                    @click="togglePurchased(item)">{{ item.label }}</li>
+								<div class="col-md-12 md-4 p-4 bg-light" v-for="item in reversedItems"
+                                    @click="togglePurchased(item)">
+                                	<h4 class="text-capitalize row" :class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']">{{ item.label }}</h4>
+                                	<p class=" row">
+                                		<strong>Description: </strong>
+                                		<br/>
+                                		{{ item.description }}
+                                	</p>	
+                                </div>
 								<!-- gives more flexibility -->
 							</ul>
 						</div>
@@ -59,7 +71,7 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/vue"></script>
+	<script src="vue.js"></script>
 	<script>
 		var shoppingList = new Vue({
 			el: '#shopping-list',
@@ -67,36 +79,48 @@
 				header: 'shopping list',
 				state: 'default',
 				newItem: '',
+				newItemDescription: '',
 				items:[
 					{
-						label: '25 party hats',
+						label: 'party hats',
+						description: '24 Pcs Mickey Mouse or Disney Pricess Design',
 						purchased: false,
 						priority: false,
 					},
 					{
-						label: '25 monoblock chairs',
+						label: 'monoblock chairs',
+						description: '25 pcs monoblock chair for rent',
 						purchased: true,
 						priority: false,
 					},
 					{
-						label: '30 paper plates',
+						label: 'paper plates',
+						description: '20 pieces of paper plates in 1 pack',
 						purchased: false,
 						priority: true,
 					}
 				]
 			},
-			computed: {
-				characterCount() {
-					return this.newItem.length;
+			computed: { 
+				// computed properties change data for presentation wise
+				//  Must not alteror change existing data
+				reversedItems() {
+					return this.items.slice(0).reverse();
 				}
 			},
 			methods: {
 				saveItem: function(){
-					this.items.push(this.newItem);
+					this.items.push({
+						label: this.newItem,
+						description: this.newItemDescription,
+						purchased: false
+					});
+					this.newItem = "";
 				},
 				changeState: function(newState){
 					this.state = newState;
 					this.newItem = "";
+					this.newItemDescription = "";
 				},
                 togglePurchased: function(item) {
                     item.purchased = !item.purchased
