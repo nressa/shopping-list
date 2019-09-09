@@ -31,7 +31,7 @@
 							
 							<div class="form-row" v-if="state === 'edit'">
 								<div class="col-md-8">
-									<input type="text" v-model="newItem" class="form-control m-md-3" placeholder="add new item ..." />
+									<input type="text" v-model="newItem" class="form-control m-md-3" placeholder="Add new item ..." />
 									<textarea type="text" v-model="newItemDescription" class="form-control m-md-3" placeholder="What is the item description?">
 									</textarea>
 									<button class="btn btn-primary m-md-3" :disabled="newItem.length && newItemDescription.length === 0" @click="saveItem()">Add Item</button>
@@ -42,24 +42,35 @@
 
 							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
 
-							<ul>
+							<div class="row">
 								<!-- Object Style -->
 								<!-- <li v-for="item in items" :class="{strikeout: item.purchased}">{{ item.label }}</li> -->
 								<!-- Keeps template simple  -->
 
 								<!-- Array Style -->
 								<!-- Favorable to toggle multiple classes (Sample: High Priority) -->
-								<div class="col-md-12 md-4 p-4 bg-light" v-for="item in reversedItems"
-                                    @click="togglePurchased(item)">
-                                	<h4 class="text-capitalize row" :class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']">{{ item.label }}</h4>
-                                	<p class=" row">
-                                		<strong>Description: </strong>
-                                		<br/>
-                                		{{ item.description }}
-                                	</p>	
+								<div class="col-md-4 md-4" v-for="item in reversedItems">
+                                    <div class="card-item">
+										<div class="container-fluid">
+		                                	<h4 class="text-capitalize row" :class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']">{{ item.label }}</h4>
+		                                	<p class=" row">
+		                                		<strong>Description: </strong>
+		                                		<br/>
+		                                		{{ item.description }}
+		                                	</p>
+		                                	<div class="float-right">
+		                                		<button class="btn"
+													:class="[item.priority ? 'btn-danger' : '']"
+		                                			@click="togglePriority(item)">
+		                                			{{item.priority ? 'High' : 'Low'}} Priority
+		                                		</button>
+		                                		<button class="btn btn-success" @click="togglePurchased(item)">Purchase</button>
+		                                	</div>
+										</div>	
+									</div>
                                 </div>
 								<!-- gives more flexibility -->
-							</ul>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -124,6 +135,9 @@
 				},
                 togglePurchased: function(item) {
                     item.purchased = !item.purchased
+                },
+                togglePriority: function(item) {
+                    item.priority = !item.priority
                 }
 			}
 		});

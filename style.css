@@ -7,6 +7,16 @@ body{
 	color: #999!important;
 }
 
-.li{
-	cursor: pointer;
+.card-item {
+    background-color: #f0f8ff;
+    padding: 5px;
+    padding-bottom: 0;
+    padding-top: 10px;
+    cursor: pointer;
+    min-height: 180px;
+
+}
+
+.card-item:hover{
+	background-color: #f0f3ff;
 }
