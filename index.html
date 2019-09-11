@@ -14,68 +14,20 @@
 	<div id="shopping-list">
 		<div class="container-fluid">
 			<br/>
-			<div class="container-fluid p-lg-4 p-sm-2">
 				<div class="col-md-12">
-					<div class="float-right">
-						<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
-						<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
-					</div>
-					<h1>{{ header.toLocaleUpperCase() }}</h1>
+					<h1 class="text-uppercase">Shopping List</h1>
 					<br/>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<p class="font-weight-bold">Add Party Need:</p>
-						
-						<div class="form-row" v-if="state === 'edit'">
-							<div class="col-md-8">
-								<input type="text" v-model="newItem" class="form-control m-md-3" placeholder="Add new item ..." />
-								<textarea type="text" v-model="newItemDescription" class="form-control m-md-3" placeholder="What is the item description?">
-								</textarea>
-								<button class="btn btn-primary m-md-3" :disabled="newItem.length && newItemDescription.length === 0" @click="saveItem()">Add Item</button>
+
+					<div class="row">
+						<div class="col-md-6" >
+							<div class="row">
+								<Itemcard></Itemcard>
+								<Itemcard></Itemcard>
+								<Itemcard></Itemcard>	
 							</div>
 						</div>
-
-						<br/>
-
-						<h3 class="text-success text-center" v-if="items.length === 0">No item in the list</h3>
-
-						<div class="row">
-							<!-- Object Style -->
-							<!-- <li v-for="item in items" :class="{strikeout: item.purchased}">{{ item.label }}</li> -->
-							<!-- Keeps template simple  -->
-
-							<!-- Array Style -->
-							<!-- Favorable to toggle multiple classes (Sample: High Priority) -->
-							<div class="col-md-4 md-4" v-for="item in reversedItems">
-                                <div class="card-item p-2" :class="[item.purchased ? 'bg-purchased' : '']">
-									<div class="container-fluid">
-	                                	<h4 class="text-capitalize row" :class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']">{{ item.label }}</h4>
-	                                	<div class="row item-description">
-	                                		<p :class="[item.purchased ? 'text-muted' : '']"><strong>Description: </strong>
-	                                		{{ item.description }}</p>
-	                                	</div>
-	                                	<div class="float-right">
-	                                		<button class="btn"
-												:class="[item.priority ? 'btn-danger' : '']"
-	                                			@click="togglePriority(item)">
-	                                			{{item.priority ? 'High' : 'Low'}} Priority
-	                                		</button>
-	                                		<button class="btn" 
-												:class="[item.purchased ? 'btn-success' : '']"
-	                                			@click="togglePurchased(item)">
-	                                			Purchase
-	                                		</button>
-	                                	</div>
-									</div>	
-								</div>
-								<br/>
-                            </div>
-							<!-- gives more flexibility -->
-						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 	<br/>
@@ -83,6 +35,29 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+	<script type="text/x-template" id="item-card-template">
+		<div class="col-md-6">
+			<div class="card p-2">
+				<div class="container-fluid">
+					<h2>Title Here</h2>
+					<p class="text-secondary">
+						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+					</p>
+				</div>	
+			</div>
+			<br/>
+		</div>
+	</script>
+
+	</script>
+
 	<script src="vue.js"></script>
 	<script src="app.js"></script>
 </body>
