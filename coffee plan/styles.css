@@ -6,9 +6,14 @@ body{
 	background-size: contain;
 	background-color: #fff;
 	background-repeat: no-repeat;
+
 }
 
 .card-plan{
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+}
+
+p{
+	color: #666;
 }

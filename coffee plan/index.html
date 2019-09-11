@@ -22,10 +22,7 @@
 				<br/>
 				<div class="row">
 					<div class="col-md-12 ">
-						<card-plan name="Brown Coffee"></card-plan>
-						<card-plan name="Espresso"></card-plan>
-						<card-plan name="Mocha"></card-plan>
-						<card-plan name="Vanilla"></card-plan>
+						<card-plan v-for="plan in plans" :name="plan.label" :description="plan.description"></card-plan>
 					</div>
 				</div>
 			</div>
@@ -36,6 +33,7 @@
 	<script type="text/x-template" id="card-plan-template">
 		<div class="card p-md-2 card-plan">
 			<h3 class="text-center">{{name}}</h3>
+			<p class="text-center">{{description}}</p>
 		</div>
 	</script>
 
