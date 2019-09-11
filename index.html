@@ -19,9 +19,9 @@
 					<br/>
 
 					<div class="row">
-						<div class="col-md-6" >
+						<div class="col-md-7" >
 							<div class="row">
-								<Itemcard v-for="item in items" :name="item.name" :description="item.description"></Itemcard>
+								<Itemcard v-for="item in items" :name="item.name.default" :description="item.description"></Itemcard>
 							</div>
 						</div>
 					</div>

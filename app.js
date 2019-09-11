@@ -14,15 +14,27 @@ var shoppingList = new Vue({
 		newItemDescription: '',
 		items:[
 			{
-				name: 'party hats',
+				name: {
+					type: String,
+					required: true,
+					default: 'party hats',
+				},
 				description: '24 Pcs Mickey Mouse or Disney Pricess Design',
 			},
 			{
-				name: 'monoblock chairs',
+				name: {
+					type: String,
+					required: true,
+					default: 'monoblock chairs',
+				},
 				description: '25 pcs monoblock chair for rent',
 			},
 			{
-				name: 'paper plates',
+				name: {
+					type: String,
+					required: true,
+					default: 'paper plates',
+				},
 				description: '20 pieces of paper plates in 1 pack',
 			}
 		]
