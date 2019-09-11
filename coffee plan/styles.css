@@ -1,0 +1,14 @@
+body{
+	min-height: 100vh;
+	background-attachment: fixed;
+	background-position: center;
+	background-image: url('bg.jpg');
+	background-size: contain;
+	background-color: #fff;
+	background-repeat: no-repeat;
+}
+
+.card-plan{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
