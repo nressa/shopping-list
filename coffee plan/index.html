@@ -19,16 +19,21 @@
 			<div class="col-md-4">
 				<br/>
 				<h1 class="text-center font-weight-bold">Coffe Plans</h1>
+				
 				<br/>
 				<div class="row">
-					<div class="col-md-12 ">
-						<card-plan v-for="plan in plans" :name="plan.label" :description="plan.description"></card-plan>
-					</div>
+					<plan-section></plan-section>
 				</div>
 			</div>
 
 		</div>
 	</div>
+
+	<script type="text/x-template" id="plan-section-template">
+		<div class="col-md-12 ">
+			<card-plan v-for="plan in plans" :name="plan.label" :description="plan.description"></card-plan>
+		</div>
+	</script>
 	
 	<script type="text/x-template" id="card-plan-template">
 		<div class="card p-md-2 card-plan">
