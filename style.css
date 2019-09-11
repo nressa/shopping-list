@@ -1,0 +1,37 @@
+body{
+	background-color: #f8f8f8;
+    background-image: url('bg.jpg');
+    background-position: center;
+    background-attachment: fixed;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+}
+
+.strikeout{
+	text-decoration: line-through;
+	color: #999!important;
+}
+
+.card-item {
+	border: 2px solid #f0f8ff;
+    background-color: #f0f8ff;
+    padding: 5px;
+    padding-bottom: 0;
+    padding-top: 10px;
+    cursor: pointer;
+    min-height: 200px;
+
+}
+
+.item-description{
+    min-height: 100px;
+}
+
+.card-item:hover{
+	border: 2px solid #5988b1;
+}
+
+.bg-purchased{
+	background-color: #e8dede;
+}

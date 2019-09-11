@@ -6,7 +6,7 @@
  	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
  	<meta name="author" content="John Doe">
  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
- 	<link type="css/stylesheet" href="styles.css" />
+ 	<link rel="stylesheet" href="style.css" />
  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 	<title>Shopping List App</title>
 </head>
@@ -14,34 +14,18 @@
 	<div id="shopping-list">
 		<div class="container-fluid">
 			<br/>
-			<div class="card">
-				<div class="container-fluid p-lg-4 p-sm-2">
-					<div class="col-md-12">
-						<h1>{{ header.toLocaleUpperCase() }}</h1>
-						<br/>
-						<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
-						<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
-					</div>
+				<div class="col-md-12">
+					<h1 class="text-uppercase">{{header}}</h1>
 					<br/>
+
 					<div class="row">
-						<div class="col-md-12">
-							<p class="font-weight-bold">Party Need:</p>
-							
-							<div class="form-row" v-if="state === 'edit'">
-								<div class="col-md-9">
-									<input type="text" v-model="newItem" class="form-control" placeholder="add new item ..." />
-								</div>
-								<button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem()">Add Item</button>
+						<div class="col-md-7" >
+							<div class="row">
+								<Itemcard v-for="item in items" :name="item.name.default" :description="item.description"></Itemcard>
 							</div>
-							<br/>
-							<p class="text-success" v-if="items.length ===0">You bought all items in the list</p>
-							<ul>
-								<li v-for="item in items">{{ item }}</li>
-							</ul>
 						</div>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 	<br/>
@@ -49,33 +33,25 @@
 	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-	<script src="https://unpkg.com/vue"></script>
-	<script>
-		var shoppingList = new Vue({
-			el: '#shopping-list',
-			data: {
-				header: 'shopping list',
-				state: 'default',
-				newItem: '',
-				items:[
-					// '20 hats',
-					// '10 poppers',
-					// '40 pair of spoon and fork',
-					// '20 paper plates',
-					// '40 cups'
-				]
-			},
-			methods: {
-				saveItem: function(){
-					this.items.push(this.newItem);
-					this.newItem = "";
-				},
-				changeState: function(newState){
-					this.state = newState;
-					this.newItem = "";
-				}
-			}
-		});
+
+
+	<script type="text/x-template" id="item-card-template">
+		<div class="col-md-6">
+			<div class="card p-md-4">
+				<div class="container-fluid">
+					<h3>{{name}}</h3>
+					<p class="text-secondary">
+						{{description}}
+					</p>
+				</div>	
+			</div>
+			<br/>
+		</div>
 	</script>
+
+	</script>
+
+	<script src="vue.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>
