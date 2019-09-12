@@ -1,0 +1,30 @@
+body{
+	background-color: #f8f8f8;
+}
+
+.strikeout{
+	text-decoration: line-through;
+	color: #999!important;
+}
+
+.card-item {
+    background-color: #f0f8ff;
+    padding: 5px;
+    padding-bottom: 0;
+    padding-top: 10px;
+    cursor: pointer;
+    min-height: 200px;
+
+}
+
+.item-description{
+    min-height: 100px;
+}
+
+.card-item:hover{
+	background-color: #f0f3ff;
+}
+
+.bg-purchased{
+	background-color: #e8dede;
+}

@@ -20,25 +20,23 @@
 				<br/>
 				<h1 class="text-center font-weight-bold">Coffe Plans</h1>
 
-				<br/>
-				<div class="row">
 					<plan-section></plan-section>
-				</div>
 			</div>
 
 		</div>
 	</div>
 
 	<script type="text/x-template" id="plan-section-template">
-		<div class="col-md-12 ">
-			<card-plan v-for="plan in plans" :name="plan.label" :description="plan.description"></card-plan>
+		<div class="row">
+			<div class="col-md-12">
+				<card-plan v-for="plan in plans" :name="plan"></card-plan>
+			</div>
 		</div>
 	</script>
 	
 	<script type="text/x-template" id="card-plan-template">
-		<div class="card p-md-2 card-plan">
+		<div @click="select" class="card p-md-2 card-plan"  :class="{'active-plan': selected}">
 			<h3 class="text-center">{{name}}</h3>
-			<p class="text-center">{{description}}</p>
 		</div>
 	</script>
 

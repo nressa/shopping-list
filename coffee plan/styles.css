@@ -17,3 +17,7 @@ body{
 p{
 	color: #666;
 }
+
+.active-plan{
+	background-color: rgba(172, 160, 162, 0.8);
+}
