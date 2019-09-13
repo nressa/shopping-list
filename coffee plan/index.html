@@ -18,7 +18,7 @@
 
 			<div class="col-md-4">
 				<br/>
-				<h1 class="text-center font-weight-bold">Coffe Plans</h1>
+				<h1 class="text-center font-weight-bold">Coffee Plans</h1>
 
 					<plan-section></plan-section>
 			</div>
@@ -27,15 +27,13 @@
 	</div>
 
 	<script type="text/x-template" id="plan-section-template">
-		<div class="row">
-			<div class="col-md-12">
-				<card-plan v-for="plan in plans" :name="plan"></card-plan>
-			</div>
+		<div class="col-md-12">
+			<card-plan v-for="plan in plans" :name="plan"  @select="selectPlan" :selected-plan="selectedPlan"></card-plan>
 		</div>
 	</script>
 	
 	<script type="text/x-template" id="card-plan-template">
-		<div @click="select" class="card p-md-2 card-plan"  :class="{'active-plan': selected}">
+		<div @click="select" class="card p-md-2 card-plan"  :class="{'active-plan': isSelected}">
 			<h3 class="text-center">{{name}}</h3>
 		</div>
 	</script>

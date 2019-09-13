@@ -5,17 +5,20 @@ let CardPlanComponent = {
 				name: {
 					type: String,
 					required: true
+				},
+				selectedPlan: {
+					type: String
 				}
-			},
-	data() {
-		return {
-
-				selected: false
+			
+	},
+	computed: {
+		isSelected() {
+			return this.name == this.selectedPlan
 		}
 	},
 	methods: {
 				select() {
-					this.selected = true
+					this.$emit('select',this.name)
 				}
 	}
 }
@@ -27,7 +30,13 @@ let PlanSectionComponent = {
 	},
 	data() {
 		return {
-				plans: 	[ 'Brown Coffee', 'Espresso', 'Mocha' , 'Vanilla']
+				plans: 	[ 'Brown Coffee', 'Espresso', 'Mocha' , 'Vanilla'],
+				selectedPlan: null
+		}
+	},
+	methods: {
+		selectPlan(plan) {
+			this.selectedPlan = plan
 		}
 	}
 }
