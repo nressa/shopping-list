@@ -1,0 +1,23 @@
+body{
+	min-height: 100vh;
+	background-attachment: fixed;
+	background-position: center;
+	background-image: url('bg.jpg');
+	background-size: contain;
+	background-color: #fff;
+	background-repeat: no-repeat;
+
+}
+
+.card-plan{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+}
+
+p{
+	color: #666;
+}
+
+.active-plan{
+	background-color: rgba(172, 160, 162, 0.8);
+}

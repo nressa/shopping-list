@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ 	<meta charset="UTF-8">
+ 	<meta name="description" content="Free Web tutorials">
+ 	<meta name="keywords" content="HTML,CSS,XML,JavaScript">
+ 	<meta name="author" content="John Doe">
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<link rel="stylesheet" href="style.css" />
+ 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<title>Shopping List App</title>
+</head>
+<body>
+	<div id="shopping-list">
+		<div class="container-fluid">
+			<br/>
+			<div class="card">
+				<div class="container-fluid p-lg-4 p-sm-2">
+					<div class="col-md-12">
+						<div class="float-right">
+							<button v-if="state === 'default'" class="btn btn-primary" @click="changeState('edit')">Add Item</button>
+							<button v-else class="btn btn-danger" @click="changeState('default')">Cancel</button>
+						</div>
+						<h1>{{ header.toLocaleUpperCase() }}</h1>
+						<br/>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<p class="font-weight-bold">Add Party Need:</p>
+							
+							<div class="form-row" v-if="state === 'edit'">
+								<div class="col-md-8">
+									<input type="text" v-model="newItem" class="form-control m-md-3" placeholder="Add new item ..." />
+									<textarea type="text" v-model="newItemDescription" class="form-control m-md-3" placeholder="What is the item description?">
+									</textarea>
+									<button class="btn btn-primary m-md-3" :disabled="newItem.length && newItemDescription.length === 0" @click="saveItem()">Add Item</button>
+								</div>
+							</div>
+
+							<br/>
+
+							<h3 class="text-success text-center" v-if="items.length === 0">No item in the list</h3>
+
+							<div class="row">
+								<!-- Object Style -->
+								<!-- <li v-for="item in items" :class="{strikeout: item.purchased}">{{ item.label }}</li> -->
+								<!-- Keeps template simple  -->
+
+								<!-- Array Style -->
+								<!-- Favorable to toggle multiple classes (Sample: High Priority) -->
+								<div class="col-md-4 md-4" v-for="item in reversedItems">
+                                    <div class="card-item p-2" :class="[item.purchased ? 'bg-purchased' : '']">
+										<div class="container-fluid">
+		                                	<h4 class="text-capitalize row" :class="[item.purchased ? 'strikeout' : '' , item.priority ? 'text-danger' : '']">{{ item.label }}</h4>
+		                                	<div class="row item-description">
+		                                		<p :class="[item.purchased ? 'text-muted' : '']"><strong>Description: </strong>
+		                                		{{ item.description }}</p>
+		                                	</div>
+		                                	<div class="float-right">
+		                                		<button class="btn"
+													:class="[item.priority ? 'btn-danger' : '']"
+		                                			@click="togglePriority(item)">
+		                                			{{item.priority ? 'High' : 'Low'}} Priority
+		                                		</button>
+		                                		<button class="btn" 
+													:class="[item.purchased ? 'btn-success' : '']"
+		                                			@click="togglePurchased(item)">
+		                                			Purchase
+		                                		</button>
+		                                	</div>
+										</div>	
+									</div>
+									<br/>
+                                </div>
+								<!-- gives more flexibility -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br/>
+
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<script src="vue.js"></script>
+	<script>
+		var shoppingList = new Vue({
+			el: '#shopping-list',
+			data: {
+				header: 'shopping list',
+				state: 'default',
+				searchItem: null,
+				newItem: '',
+				newItemDescription: '',
+				items:[
+					{
+						label: 'party hats',
+						description: '24 Pcs Mickey Mouse or Disney Pricess Design',
+						purchased: false,
+						priority: false,
+					},
+					{
+						label: 'monoblock chairs',
+						description: '25 pcs monoblock chair for rent',
+						purchased: true,
+						priority: false,
+					},
+					{
+						label: 'paper plates',
+						description: '20 pieces of paper plates in 1 pack',
+						purchased: false,
+						priority: true,
+					}
+				]
+			},
+			computed: { 
+				// computed properties change data for presentation wise
+				//  Must not alter or change existing data
+				reversedItems() {
+					return this.items.slice(0).reverse();
+				}
+
+			},
+			methods: {
+				saveItem: function(){
+					this.items.push({
+						label: this.newItem,
+						description: this.newItemDescription,
+						purchased: false,
+						priority: false
+					});
+					this.newItem = "";
+				},
+				changeState: function(newState){
+					this.state = newState;
+					this.newItem = "";
+					this.newItemDescription = "";
+				},
+                togglePurchased: function(item) {
+                    item.purchased = !item.purchased
+                },
+                togglePriority: function(item) {
+                    item.priority = !item.priority
+                },
+			}
+		});
+	</script>
+</body>
+</html>
