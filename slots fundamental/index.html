@@ -59,8 +59,8 @@
 
 	<script type="text/x-template" id="todo-item-template">
 		<div class="box">
-			<input type="checkbox" v-model="completed" />
 			<label :class="{done: completed}">
+				<input type="checkbox" v-model="completed" />
 				<slot></slot>
 			</label>
 			<slot name="description"></slot>
