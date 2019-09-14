@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  	<title>Vue JS Slots Fundamentals - Practice</title>
+	<style type="text/css">
+		body{
+			font-size: 16px;
+			font-family: cambria;
+		}
+		p{
+			font-size: 16px;
+		}
+		h1{
+			text-align: center;
+		}
+		.section-home{
+			min-height: 30vh;
+			background-color: #f8f8f8;
+		}
+		.section-about{
+			min-height: 40vh;
+		}
+		.section-contact{
+			min-height: 30vh;
+		}
+		.text-description{
+			padding: 25px;
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<page-layout>
+			<template #home>
+				Home
+			</template>
+				<p>Culpa tempor minim ex magna sint duis mollit in ut irure pariatur ad est eu anim sed reprehenderit cillum deserunt ea nisi adipisicing sint do duis velit dolor aliqua est enim laboris excepteur ullamco laborum duis consectetur in.</p>
+				<p>Fugiat nulla sunt ex incididunt aute dolore dolor nostrud in ullamco laborum officia in dolor pariatur velit est pariatur sint in sit adipisicing fugiat ut reprehenderit ut sunt dolor proident dolor anim laborum in nisi esse magna.</p>
+			<template #about>
+				About
+			</template>
+			<template #contact>
+				Contact
+			</template>
+		</page-layout>
+	</div>
+
+	<script type="text/x-template" id="page-layout-template">
+		<div>
+			<header>
+				<div class="section-home">
+					<h1><slot name="home"></slot></h1>
+				</div>
+			</header>
+			<main>
+				<div class="section-about">
+					<h1><slot name="about"></slot></h1>
+					<p class="text-description">
+						<slot name="description">
+							Aliquip id veniam excepteur do voluptate magna occaecat aliquip pariatur voluptate quis reprehenderit velit tempor consectetur in nisi ad commodo minim ut minim in officia sint tempor est officia in id nisi nostrud culpa ad irure culpa dolor nisi voluptate adipisicing elit laboris deserunt labore sit qui in veniam anim velit irure consectetur dolore esse laboris do laboris officia veniam nisi laboris elit id excepteur aliquip in sunt qui dolor dolore ex magna ut amet mollit labore ut ex non non eiusmod ut fugiat esse laboris dolor dolor non deserunt id in sit proident dolor in id occaecat voluptate et nisi duis in do non ea cillum nulla elit occaecat sint ut ullamco exercitation aute exercitation tempor sed labore ex sunt magna aliquip esse in adipisicing commodo sed velit laboris excepteur enim do sed adipisicing id amet nisi deserunt occaecat proident ut quis ullamco irure occaecat commodo fugiat voluptate in culpa officia aute proident adipisicing voluptate id do consectetur nisi do ad dolor cupidatat ex ut elit eu occaecat nulla dolor culpa culpa laborum velit enim ut exercitation et ad est aute esse nostrud.
+						</slot>
+					</p>
+				</div>
+			</main>
+			<footer
+			<div class="section-contact">
+				<h1><slot name="contact"></slot></h1>
+			</div>
+			</footer>
+		</div>
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>
