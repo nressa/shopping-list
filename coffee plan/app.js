@@ -44,6 +44,11 @@ let PlanSection = {
 
 new Vue({
 	el: '#plan',
+	data: function() {
+		return{
+					header: 'Coffe Plans',
+		}
+	},
 	components: {
 		'plan-section': PlanSection,
 	}
