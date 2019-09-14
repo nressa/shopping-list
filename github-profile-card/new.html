@@ -1,0 +1,78 @@
+<html>
+
+<head>
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+</head>
+
+<body>
+
+  <div id="app"
+       class="ui container">
+    <h1>GitHub Profiles</h1>
+    <github-user-card username="hootlex"></github-user-card>
+  ----
+  </div>
+
+  <script type="text/x-template" id="github-user-card-template">
+    <!-- Template for GitHub card -->
+    <div class="ui card">
+      <div class="image">
+        <img :src="avatar">
+      </div>
+      <div class="content">
+        <a class="header">{{ username }}</a>
+        <div class="meta">
+          <span class="date">Joined in {{date_joined}}</span>
+        </div>
+        <div class="description">
+          {{bio}}
+        </div>
+      </div>
+      <div class="extra content">
+        <a>
+          <i class="user icon"></i>
+          {{ followers }} Friends
+        </a>
+      </div>
+    </div>
+  </script>
+
+  <!-- Import Vue.js and axios -->
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+  <!-- Your JavaScript Code :) -->
+  <script>
+    Vue.component('github-user-card',  {
+        template: '#github-user-card-template',
+        data() {
+          return{
+                  username: null,
+                  avatar:null,
+                  bio: null,
+                  date_joined: null,
+                  followers: null,
+                }
+        },
+        mounted: function() {
+          this.username = this.$el.getAttribute('username');
+        },
+        created() {
+          axios.get('https://api.github.com/users/' + this.username).then(response => {
+            this.avatar = response.data.avatar_url
+            this.bio = response.data.bio,
+            this.date_joined = response.data.created_at
+            this.followers = response.data.followers
+          })
+          this.date_joined = 'asd'
+           
+        }
+    });
+    new Vue({
+      el: '#app'
+    })
+  </script>
+</body>
+
+</html>
