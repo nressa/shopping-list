@@ -16,6 +16,15 @@ What I Did in this application:
 
 
 
+# Vue.js Components Fundamentals
+
+# Button
+1. Introduction to Creating components
+2. Separate Events from buttons
+3. x-template
+
+
+
 # coffee plan
  Vue.js Components Fundamentals
  1. Introduction to Components
@@ -24,3 +33,13 @@ What I Did in this application:
  4. Nested Components
  5. Global vs Local Components
  6. Communication Between Components
+
+
+ 
+ # chapter 2
+ Learn about
+ 7. Components Naming Best Practice
+ 8. Component Lifecycle Hooks
+ 9. Component Slots
+
+
