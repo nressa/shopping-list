@@ -28,11 +28,11 @@
 
 	<script type="text/x-template" id="plan-section-template">
 		<div class="col-md-12">
-			<card-plan v-for="plan in plans" :name="plan"  @select="selectPlan" :selected-plan="selectedPlan"></card-plan>
+			<plan-section-item v-for="plan in plans" :name="plan"  @select="selectPlan" :selected-plan="selectedPlan"></plan-section-item>
 		</div>
 	</script>
 	
-	<script type="text/x-template" id="card-plan-template">
+	<script type="text/x-template" id="plan-section-item-template">
 		<div @click="select" class="card p-md-2 card-plan"  :class="{'active-plan': isSelected}">
 			<h3 class="text-center">{{name}}</h3>
 		</div>
