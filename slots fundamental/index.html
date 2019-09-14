@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  	<title>Vue JS Slots Fundamentals</title>
+
+  	<style type="text/css">
+  		body{
+  			font-size: 16px;
+  		}
+
+  		.done{
+			color:green;
+			text-decoration: line-through;
+  		}
+
+  		.box{
+			margin: 10px;
+			padding: 10px;
+			min-height: 200px;
+			min-width: 40%;
+			display: inline-block;
+			border: 2px solid #333;
+  		}
+  	</style>
+</head>
+
+<body>
+	<div id="app">
+		<h1>Vue JS Slots Fundamentals</h1>
+		<p>
+			Remember
+
+			If you need to pass HTML to your components, use slots. If you need to pass data, use props.
+		</p>
+		<todo-item>
+			Buy-Banana	
+
+			<template #description>
+				<p>Est cupidatat ut veniam laborum magna amet amet labore nulla commodo pariatur.</p>
+			</template>
+			<template #button-text>
+				Complete Task
+			</template>
+		</todo-item>
+
+		<todo-item>
+			Mango
+
+			<template #description>
+				<p>Est cupidatat ut veniam laborum magna amet amet labore nulla commodo pariatur.</p>
+			</template>
+		</todo-item>
+	</div>
+
+	<script type="text/x-template" id="todo-item-template">
+		<div class="box">
+			<input type="checkbox" v-model="completed" />
+			<label :class="{done: completed}">
+				<slot></slot>
+			</label>
+			<slot name="description"></slot>
+			<button><slot name="button-text">Default</slot></button>
+		</div>
+	</script>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
+	<script src="app.js"></script>
+</body>
+
+</html>

@@ -1,6 +1,6 @@
 
-let CardPlanComponent = {
-	template: '#card-plan-template',
+let PlanSectionItem = {
+	template: '#plan-section-item-template',
 	props: {
 				name: {
 					type: String,
@@ -23,10 +23,10 @@ let CardPlanComponent = {
 	}
 }
 
-let PlanSectionComponent = {
+let PlanSection = {
 	template: '#plan-section-template',
 	components: {
-		'card-plan': CardPlanComponent,
+		'plan-section-item': PlanSectionItem,
 	},
 	data() {
 		return {
@@ -44,7 +44,12 @@ let PlanSectionComponent = {
 
 new Vue({
 	el: '#plan',
+	data: function() {
+		return{
+					header: 'Coffe Plans',
+		}
+	},
 	components: {
-		'plan-section': PlanSectionComponent,
+		'plan-section': PlanSection,
 	}
 })
