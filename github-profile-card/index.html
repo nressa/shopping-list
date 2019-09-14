@@ -1,8 +1,13 @@
 <html>
 
 <head>
-  <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+  <style type="text/css">
+    .card{
+      min-height: 500px!important;
+      margin-bottom: 25px!important;
+    }
+  </style>
 </head>
 
 <body>
@@ -10,31 +15,37 @@
   <div id="app"
        class="ui container">
     <h1>GitHub Profiles</h1>
-    <github-user-card username="hootlex"></github-user-card>
-  ----
+    <div class="ui cards">
+      <div v-for="username in usernames">
+      <github-user-card 
+          :username="username">
+      </github-user-card>
+      </div>
+    </div>
   </div>
 
   <script type="text/x-template" id="github-user-card-template">
     <!-- Template for GitHub card -->
     <div class="ui card">
       <div class="image">
-        <img :src="avatar">
+        <img :src="user.avatar_url">
       </div>
       <div class="content">
-        <a class="header">{{ username }}</a>
+        <a :href="`https://github.com/${username}`" class="header">{{ user.name }}</a>
         <div class="meta">
-          <span class="date">Joined in {{date_joined}}</span>
+          <span class="date">Joined in {{ user.created_at }}</span>
         </div>
         <div class="description">
-          {{bio}}
+          {{ user.bio }}
         </div>
       </div>
       <div class="extra content">
         <a>
           <i class="user icon"></i>
-          {{ followers }} Friends
+          {{ user.followers }} Friends
         </a>
       </div>
+      <br/>
     </div>
   </script>
 
@@ -44,36 +55,32 @@
 
   <!-- Your JavaScript Code :) -->
   <script>
-
     Vue.component('github-user-card',  {
         template: '#github-user-card-template',
+        props: {
+          username: {
+            type: String,
+            required: true
+          },
+        },
         data() {
           return{
-                  username: null,
-                  avatar:null,
-                  bio: null,
-                  date_joined: null,
-                  followers: null,
-                }
-        },
-        mounted: function() {
-          this.username = this.$el.getAttribute('username');
+                  user: {}
+          }
         },
         created() {
-          axios.get('https://api.github.com/users/' + this.username).then(response => {
-            this.avatar = response.data.avatar_url
-            this.bio = response.data.bio,
-            this.date_joined = response.data.created_at
-            this.followers = response.data.followers
-          })
-          this.date_joined = 'asd'
-           
+          axios.get('https://api.github.com/users/' + this.username)
+            .then(response => {
+              this.user = response.data
+            })
         }
-
     });
 
     new Vue({
-      el: '#app'
+      el: '#app',
+      data: {
+        usernames:['hootlex', 'rahaug', 'sdras', 'akryum']
+      }
     })
   </script>
 </body>

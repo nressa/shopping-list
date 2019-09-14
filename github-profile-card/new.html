@@ -44,13 +44,11 @@
 
   <!-- Your JavaScript Code :) -->
   <script>
-
     Vue.component('github-user-card',  {
         template: '#github-user-card-template',
         data() {
           return{
                   username: null,
-                  userInfo: null,
                   avatar:null,
                   bio: null,
                   date_joined: null,
@@ -62,7 +60,6 @@
         },
         created() {
           axios.get('https://api.github.com/users/' + this.username).then(response => {
-            this.userInfo = response.data
             this.avatar = response.data.avatar_url
             this.bio = response.data.bio,
             this.date_joined = response.data.created_at
@@ -71,9 +68,7 @@
           this.date_joined = 'asd'
            
         }
-
     });
-
     new Vue({
       el: '#app'
     })
