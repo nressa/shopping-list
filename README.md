@@ -36,10 +36,14 @@ What I Did in this application:
 
 
  
- # chapter 2
+ ## chapter 2
  Learn about
  7. Components Naming Best Practice
  8. Component Lifecycle Hooks
  9. Component Slots
 
+ 
+ ## chapter 3
+ Learn about
+ 7. Notification Message in vue component
 
