@@ -18,14 +18,14 @@ What I Did in this application:
 
 # Vue.js Components Fundamentals
 
-# Button
+## Button
 1. Introduction to Creating components
 2. Separate Events from buttons
 3. x-template
 
 
 
-# coffee plan
+## coffee plan
  Vue.js Components Fundamentals
  1. Introduction to Components
  2. Component's Template
